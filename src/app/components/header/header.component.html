@@ -1,0 +1,19 @@
+<header>
+    <div id="logo-section">
+        <img src="/images/logoNombre-PH.png" alt="PH Logo" id="PH-logo">
+        <p>ParkHub</p>
+    </div>
+    <nav id="opciones-usuario">
+        <a [routerLink]="['/estado-cocheras']" routerLinkActive="activo">ESTADO COCHERAS</a>
+        @if (esAdmin) {
+            <a [routerLink]="['/reportes']" routerLinkActive="activo">REPORTES</a>
+            <a [routerLink]="['/']" routerLinkActive="">PRECIOS</a>
+        }
+        <button class="dropdown">
+            <img src="/images/user-icon-darkblue.png" alt="User Icon" id="user-icon">
+            <div class="dropdown-content">
+                <a (click)="logOut()" id="boton-logout">Cerrar sesión</a>
+            </div>
+        </button>
+    </nav>
+</header>

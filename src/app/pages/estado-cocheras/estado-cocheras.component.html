@@ -1,0 +1,43 @@
+<section id="estado-cocheras-section">
+    <app-header></app-header>
+
+    <main>
+        <div class="tabla">
+            <div class="header-tabla">
+                <div>Nro</div>
+                <div>Disponibilidad</div>
+                <div>Ingreso</div>
+                <div>Acciones</div>
+            </div>
+            @for(cochera of filas; track cochera.id){           <!--track $index-->
+                @if (!cochera.eliminada) {
+                    <div>
+                        <div>{{ cochera.id }}</div>
+                        @if (cochera.activo) {
+                            <button (click)="abrirModalCerrarEstacionamiento(cochera.id)">{{ cochera.activo.patente }}</button>
+                        } @else if (cochera.deshabilitada) {
+                            <div class="disponibilidad ocupada">No disponible</div>
+                        } @else {
+                            <button class="disponibilidad disponible" (click)="abrirModalNuevoEstacionamiento(cochera.id)">Disponible</button>
+                        }
+                        <div>{{ cochera.activo?.horaIngreso }}</div>
+                        <div class="acciones-container">
+                            <button (click)="habilitarCochera(cochera.id)"><img src="/images/tick-icon-darkblue.png" alt="Habilitar"  class="iconos-acciones"></button>
+                            <button (click)="deshabilitarCochera(cochera.id)"><img src="/images/cross-icon-darkblue.png" alt="Deshabilitar"  class="iconos-acciones"></button>
+                            @if (esAdmin) {
+                                <button (click)="abrirModalEliminarCochera(cochera.id)"><img src="/images/bin-icon-darkblue.png" alt="Eliminar" class="iconos-acciones"></button>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        @if (esAdmin) {
+            <div class="center-content">
+                <button (click)="agregarCochera()" class="boton-importante">Agregar cochera</button>
+            </div>
+        }
+    </main>
+    <div class="page-padding"></div>
+
+</section>
